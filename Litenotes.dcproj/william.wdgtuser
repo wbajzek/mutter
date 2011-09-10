@@ -17,7 +17,7 @@
 		</array>
 	</dict>
 	<key>ContentViewType</key>
-	<integer>0</integer>
+	<integer>5</integer>
 	<key>DeploymentOptions</key>
 	<dict>
 		<key>Destination</key>
@@ -26,6 +26,8 @@
 		<string>williambajzek@gmail.com</string>
 		<key>Path</key>
 		<string>Litenotes</string>
+		<key>Save</key>
+		<true/>
 		<key>enableSimulation</key>
 		<true/>
 		<key>simulatedHost</key>
@@ -78,9 +80,7 @@
 		<key>Objects view last selections</key>
 		<array>
 			<array>
-				<integer>0</integer>
-				<integer>0</integer>
-				<integer>2</integer>
+				<integer>5</integer>
 			</array>
 		</array>
 		<key>Opened Steps</key>

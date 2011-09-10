@@ -1,0 +1,34 @@
+body {
+    font-family:"Myriad pro";
+    color:#333;
+    background-color:#eeeeee;
+}
+
+ul, h1, h2, h3 { width:400px;}
+h1, h2, h3 { text-align:center;}
+ul {
+    list-style:none;  
+    width:400px;
+    text-indent:0;
+    padding:0;
+}
+li {
+    padding:10px;
+    border-radius:20px;
+    background-color:white;
+    margin:3px;
+}
+li span { color:#666; }
+
+h2.tags {
+    position:fixed;
+    top: 0;
+    left: 450px;    
+}
+ul.tags {
+    position:fixed;
+    top: 40px;
+    left: 450px;
+    border-radius:20px;
+    background-color:white;
+}

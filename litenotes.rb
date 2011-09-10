@@ -21,7 +21,7 @@ module Litenotes::Models
   class CreateTags < V 1.1
     def self.up
       create_table Tag.table_name do |t|
-        t.string :tag
+        t.string :name
       end
     end
     def self.down
@@ -43,7 +43,7 @@ module Litenotes::Controllers
       @note = Note.new(:content=>content);
       @note.save
       content.scan(/\#\w+/).each do |tag|
-        Tag.new(:tag=>tag).save unless Tag.find_by_tag(tag)
+        Tag.new(:name=>tag).save unless Tag.find_by_name(tag)
       end
       redirect Index
     end
@@ -56,6 +56,25 @@ module Litenotes::Controllers
       render:index
     end
   end
+  class Static < R '/static/(.+)'
+    MIME_TYPES = {
+      '.html' => 'text/html',
+      '.css'  => 'text/css',
+      '.js'   => 'text/javascript',
+      '.jpg'  => 'image/jpeg',
+      '.gif'  => 'image/gif'
+    }
+    PATH = File.expand_path(File.dirname(__FILE__))
+    def get(path)
+      @headers['Content-Type'] = MIME_TYPES[path[/\.\w+$/, 0]] || "text/plain" 
+      unless path.include? ".." # prevent directory traversal attacks
+        @headers['X-Sendfile'] = "#{PATH}/static/#{path}" 
+      else
+        @status = "403" 
+        "403 - Invalid path" 
+      end
+    end
+  end
 end
 
 module Litenotes::Views
@@ -63,6 +82,7 @@ module Litenotes::Views
     html do
       head do
         title { "Litenotes" }
+        link :href=>"/static/litenotes.css", :type=>"text/css", :rel=>"stylesheet"
       end
       body { self << yield }
     end
@@ -70,23 +90,28 @@ module Litenotes::Views
   
   def index
     h2 {"Notes"}
-    dl do
+    ul do
       @notes.each do |note|
-        dt note.created_at
-        dd note.content
+        li do
+          span note.created_at
+          p note.content
+        end
       end
     end
-    h2 {"Tags"}
-    ul do
+    h2.tags {"Tags"}
+    ul.tags do
+      li {a "None", :href => "/"}
       @tags.each do |tag|
         li do
-          a tag.tag, :href => R(TagX, tag.tag)
+          a tag.name, :href => R(TagX, tag.name)
         end
       end
     end
   end
 end
 
-def Litenotes.create
+def Litenotes.create 
   Litenotes::Models.create_schema
 end
+
+
