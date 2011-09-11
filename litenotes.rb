@@ -38,11 +38,12 @@ module Litenotes::Controllers
       render :index
     end
   end
-  class AddX
-    def post(content)
-      @note = Note.new(:content=>content);
+  class NoteX < R '/note/add'
+    def post
+      @note = Note.new;
+      @note.content = @input.content
       @note.save
-      content.scan(/\#\w+/).each do |tag|
+      @input.content.scan(/\#\w+/).each do |tag|
         Tag.new(:name=>tag).save unless Tag.find_by_name(tag)
       end
       redirect Index
@@ -50,10 +51,20 @@ module Litenotes::Controllers
   end
   class TagX
     def get(tag)
-      @notes = Note.find(:all, :conditions => ['content LIKE ?','%' + tag + '%']).reverse
-      
+      @notes = Note.find(:all, :conditions => ['content LIKE ?','%' + tag + '%']).reverse      
       @tags = Tag.all
-      render:index
+      render :index
+    end
+  end
+  class Tags
+    def get
+      @headers['Content-Type'] = "application/json"
+      @tags = Tag.find(:all, :conditions => ['name LIKE ?', @input.term + '%'])
+      tag_names = []
+      @tags.each do |tag|
+        tag_names.push '"' + tag.name + '"'
+      end 
+      mab {  "[ " + tag_names.join(',') + "];" }
     end
   end
   class Static < R '/static/(.+)'
@@ -83,14 +94,24 @@ module Litenotes::Views
       head do
         title { "Litenotes" }
         link :href=>"/static/litenotes.css", :type=>"text/css", :rel=>"stylesheet"
+        script nil,:src=>"/static/jquery-1.6.3.min.js"
+        script nil,:src=>"/static/jquery-ui-1.8.16.custom.min.js"
+        script nil,:src=>"/static/litenotes.js"        
       end
       body { self << yield }
     end
   end
   
   def index
-    h2 {"Notes"}
-    ul do
+    h2 { "Notes" }
+    ul.notes do
+      li.newnote do
+        form :action => R(NoteX), :method => :post do
+          textarea "", :id => :content, :name => :content
+          label :for => :content
+          input :type => :submit, :value => 'Save'
+        end 
+      end
       @notes.each do |note|
         li do
           span note.created_at

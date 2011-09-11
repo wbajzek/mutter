@@ -4,7 +4,12 @@ body {
     background-color:#eeeeee;
 }
 
-ul, h1, h2, h3 { width:400px;}
+body, ul, h1, h2, h3 {
+    margin:0;
+    padding:0;    
+}
+
+ul.notes, ul.tags, h1, h2, h3 { width:400px;}
 h1, h2, h3 { text-align:center;}
 ul {
     list-style:none;  
@@ -12,23 +17,61 @@ ul {
     text-indent:0;
     padding:0;
 }
-li {
+ul.notes li {
     padding:10px;
     border-radius:20px;
     background-color:white;
     margin:3px;
 }
-li span { color:#666; }
-
+ul.notes li span { color:#666; }
+ul.notes li textarea {
+    width:100%;
+    min-height:52px;
+    border:1px solid #eee;
+    border-radius:5px;
+}
+ul.notes li input[type=submit] {
+    border:1px solid #eee;
+    background-color:#ddd;
+    float:right;
+    border-radius:5px;
+}
+ul.notes li input[type=submit]:hover {
+    background-color:#eee;
+} 
 h2.tags {
+    margin:0;
+    padding:0;
     position:fixed;
     top: 0;
-    left: 450px;    
+    left: 410px;    
 }
 ul.tags {
     position:fixed;
-    top: 40px;
-    left: 450px;
+    top: 32px;
+    left: 410px;
     border-radius:20px;
     background-color:white;
+    min-height:83px;
+    padding:10px;
+}
+ul.tags li {
+    display:inline;
+    border:none;
+    margin-right: 1em;
+}
+ul.ui-autocomplete {
+    border:1px solid #ccc; 
+    padding:0; 
+    background-color:white; 
+    width:373px; 
+    box-shadow: 5px 5px 5px #ccc;
+}
+ul.ui-autocomplete li {
+    padding:0;
+    border:none;
+    border-radius:0;
+}
+ul.ui-autocomplete li:hover {
+    background-color:#eee;
 }
