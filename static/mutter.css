@@ -8,13 +8,7 @@ body, ul, h1, h2, h3 {
     margin:0;
     padding:0;    
 }
-/*h2.notes{
-    top:50px;
-    position:fixed;
-}
-ul.notes {
-    margin-top:50px;
-}*/
+
 ul.notes, ul.tags, h1, h2, h3 { width:400px;}
 div.wrapper {width:850px; margin:20px auto 20px auto;}
 div.main {float:left;}
@@ -64,10 +58,6 @@ input[type=submit]:hover {
 div.sidebar {
     margin:0;
     padding:0;
-/*    position:fixed;
-    top: 50px;
-    left: 410px;        
-*/
 }
 
 ul.tags {
