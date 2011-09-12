@@ -47,6 +47,14 @@ ul.search li input[type=text] {
     min-height:25px;
 }
 
+span.filter {
+    float:right;
+    margin-top:-37px;
+}
+span.filter a {
+    margin-left:.5em;
+}
+
 input[type=submit] {
     border:1px solid #eee;
     background-color:#ddd;

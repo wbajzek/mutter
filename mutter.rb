@@ -69,6 +69,7 @@ module Mutter::Controllers
   class TagX
     def get(tag)
       @notes = Note.find(:all, :conditions => ['content LIKE ?','%' + tag + '%']).reverse      
+      @this_tag = tag
       @tags = Tag.all
       render :index
     end
@@ -125,9 +126,17 @@ module Mutter::Views
   def index
     div.wrapper do
       div.main do
-        h2.notes { "Notes" }
+        h2.notes do 
+          span @this_tag if @this_tag
+          "Notes" 
+        end
         ul.notes do
           li.newnote do
+            span.filter do 
+              a.todo_filter "todo", :href => "javascript:return"
+              a.done_filter "done", :href => "javascript:return"
+              a.no_filter "all", :href => "javascript:return"
+            end
             form :action => R(Add), :method => :post do
               textarea "", :id => :content, :name => :content
               label :for => :content
@@ -136,9 +145,9 @@ module Mutter::Views
           end
           @todos.to_json
           @notes.each do |note|
-            li do
+            li.note do 
               span note.created_at
-              input :type => :checkbox, :value => note.todo.id, :checked => note.todo.done if note.todo
+              input.todo :type => :checkbox, :value => note.todo.id, :checked => note.todo.done if note.todo
               p note.content
             end
           end

@@ -43,4 +43,18 @@ $(function() {
         });
     })
     
+    
+    // filtering
+    $('ul.notes input.todo').closest('li').addClass('todo');
+    $('a.todo_filter').click(function() {
+        $('ul.notes > :not(".todo,.newnote")').hide();
+        $('ul.notes > .todo, ul.notes > .newnote').show();
+    })
+    $('a.done_filter').click(function() {
+        $('ul.notes > :not(".done,.newnote")').hide();
+    })
+    $('a.no_filter').click(function() {
+        $('ul.notes li').show();
+    })
+    
 })
