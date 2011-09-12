@@ -8,15 +8,19 @@ body, ul, h1, h2, h3 {
     margin:0;
     padding:0;    
 }
-h2.notes{
-    top:0;
+/*h2.notes{
+    top:50px;
     position:fixed;
 }
 ul.notes {
-    margin-top:30px;
-}
+    margin-top:50px;
+}*/
 ul.notes, ul.tags, h1, h2, h3 { width:400px;}
+div.wrapper {width:850px; margin:20px auto 20px auto;}
+div.main {float:left;}
+div.sidebar { float:right;}
 h1, h2, h3 { text-align:center; background-color:#eee;}
+h1 { margin-top:50px; width:100%; }
 ul {
     list-style:none;  
     width:400px;
@@ -60,13 +64,14 @@ input[type=submit]:hover {
 div.sidebar {
     margin:0;
     padding:0;
-    position:fixed;
-    top: 0;
+/*    position:fixed;
+    top: 50px;
     left: 410px;        
+*/
 }
-h2.tags {
-}
+
 ul.tags {
+    margin-top:7px;
     border-radius:20px;
     background-color:white;
     min-height:83px;

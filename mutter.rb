@@ -115,45 +115,52 @@ module Mutter::Views
         script nil,:src=>"/static/jquery-ui-1.8.16.custom.min.js"
         script nil,:src=>"/static/mutter.js"        
       end
-      body { div.wrapper {self << yield} }
+      body do
+        h1 "Mutter" 
+        div.wrapper {self << yield}
+      end
     end
   end
   
   def index
-    h2.notes { "Notes" }
-    ul.notes do
-      li.newnote do
-        form :action => R(Add), :method => :post do
-          textarea "", :id => :content, :name => :content
-          label :for => :content
-          input :type => :submit, :value => 'Save'
-        end 
-      end
-      @todos.to_json
-      @notes.each do |note|
-        li do
-          span note.created_at
-          input :type => :checkbox, :value => note.todo.id, :checked => note.todo.done if note.todo
-          p note.content
-        end
-      end
-    end
-    div.sidebar do
-      h2.tags {"Tags"}
-      ul.tags do
-        li {a "None", :href => R(Index)}
-        @tags.each do |tag|
-          li do
-            a tag.name, :href => R(TagX, tag.name)
+    div.wrapper do
+      div.main do
+        h2.notes { "Notes" }
+        ul.notes do
+          li.newnote do
+            form :action => R(Add), :method => :post do
+              textarea "", :id => :content, :name => :content
+              label :for => :content
+              input :type => :submit, :value => 'Save'
+            end 
+          end
+          @todos.to_json
+          @notes.each do |note|
+            li do
+              span note.created_at
+              input :type => :checkbox, :value => note.todo.id, :checked => note.todo.done if note.todo
+              p note.content
+            end
           end
         end
       end
-      h2.search {"Search"}
-      ul.search do
-        li do
-          form :action => R(Search), :method=>:get do
-            input :type => :text, :id => :search, :value => @input.search
-            input :type => :submit, :value => 'Search'
+      div.sidebar do
+        h2.tags {"Tags"}
+        ul.tags do
+          li {a "None", :href => R(Index)}
+          @tags.each do |tag|
+            li do
+              a tag.name, :href => R(TagX, tag.name)
+            end
+          end
+        end
+        h2.search {"Search"}
+        ul.search do
+          li do
+            form :action => R(Search), :method=>:get do
+              input :type => :text, :id => :search, :value => @input.search
+              input :type => :submit, :value => 'Search'
+            end
           end
         end
       end
