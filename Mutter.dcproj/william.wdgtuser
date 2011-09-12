@@ -27,7 +27,7 @@
 		<key>EmailToNotifyAddress</key>
 		<string>williambajzek@gmail.com</string>
 		<key>Path</key>
-		<string>Litenotes</string>
+		<string>Mutter</string>
 		<key>Save</key>
 		<true/>
 		<key>enableSimulation</key>
@@ -80,7 +80,13 @@
 			</array>
 		</array>
 		<key>Objects view last selections</key>
-		<array/>
+		<array>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+			</array>
+		</array>
 		<key>Opened Steps</key>
 		<array>
 			<integer>0</integer>
@@ -88,7 +94,7 @@
 		</array>
 		<key>Visible StackLayout Views</key>
 		<array>
-			<string>front</string>
+			<string>back</string>
 		</array>
 	</dict>
 </dict>

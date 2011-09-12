@@ -1,6 +1,6 @@
-Camping.goes :Litenotes
+Camping.goes :Mutter
 
-module Litenotes::Models
+module Mutter::Models
   class Note < Base
     has_one :todo
   end
@@ -31,7 +31,7 @@ module Litenotes::Models
   end
 end
 
-module Litenotes::Controllers
+module Mutter::Controllers
   class Index
     def get
       @notes = Note.all.reverse
@@ -105,15 +105,15 @@ module Litenotes::Controllers
   end
 end
 
-module Litenotes::Views
+module Mutter::Views
   def layout
     html do
       head do
-        title { "Litenotes" }
-        link :href=>"/static/litenotes.css", :type=>"text/css", :rel=>"stylesheet"
+        title { "Mutter" }
+        link :href=>"/static/Mutter.css", :type=>"text/css", :rel=>"stylesheet"
         script nil,:src=>"/static/jquery-1.6.3.min.js"
         script nil,:src=>"/static/jquery-ui-1.8.16.custom.min.js"
-        script nil,:src=>"/static/litenotes.js"        
+        script nil,:src=>"/static/mutter.js"        
       end
       body { div.wrapper {self << yield} }
     end
@@ -161,8 +161,8 @@ module Litenotes::Views
   end
 end
 
-def Litenotes.create 
-  Litenotes::Models.create_schema()
+def Mutter.create 
+  Mutter::Models.create_schema()
 end
 
 

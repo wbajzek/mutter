@@ -5,12 +5,13 @@
  code generator otherwise the changes will be lost.
  */
 var dashcodePartSpecs = {
-    "button": { "creationFunction": "CreateButton", "leftImageWidth": 5, "onclick": "gotoNotes", "rightImageWidth": 5, "text": "Go to Litenotes" },
+    "button": { "creationFunction": "CreateButton", "leftImageWidth": 5, "onclick": "gotoNotes", "rightImageWidth": 5, "text": "Go to Mutter" },
     "done": { "creationFunction": "CreateGlassButton", "onclick": "showFront", "text": "Done" },
     "info": { "backgroundStyle": "black", "creationFunction": "CreateInfoButton", "foregroundStyle": "white", "frontID": "front", "onclick": "showBack" },
     "saveButton": { "creationFunction": "CreateButton", "leftImageWidth": 5, "onclick": "saveNote", "rightImageWidth": 5, "text": "Save" },
-    "text": { "text": "Litenotes", "view": "DC.Text" },
-    "text1": { "text": "Litenotes Server URL", "view": "DC.Text" }
+    "text": { "text": "Mutter", "view": "DC.Text" },
+    "text1": { "text": "Mutter Server URL", "view": "DC.Text" }
 };
+
 
 
