@@ -13,6 +13,7 @@ ul.notes, ul.tags, h1, h2, h3 { width:400px;}
 div.wrapper {width:850px; margin:20px auto 20px auto;}
 div.main {float:left;}
 div.sidebar { float:right;}
+
 h1, h2, h3 { text-align:center; background-color:#eee;}
 h1 { margin-top:50px; width:100%; }
 ul {
@@ -55,13 +56,14 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color:#eee;
 } 
+
 div.sidebar {
     margin:0;
     padding:0;
 }
 
 ul.tags {
-    margin-top:7px;
+    margin-top:5px;
     border-radius:20px;
     background-color:white;
     min-height:83px;
@@ -72,6 +74,8 @@ ul.tags li {
     border:none;
     margin-right: 1em;
 }
+
+/* Auto-complete styles*/
 ul.ui-autocomplete {
     border:1px solid #ccc; 
     padding:0; 
