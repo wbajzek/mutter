@@ -11,16 +11,18 @@ I wanted something that:
 * has hashtags (with auto-suggest) and search
 * has todos (tag a note #todo and it magically has a checkbox)
 
-This all pretty much works already, although the dashboard widget does not yet have auto-suggest. The code is there but it needs to be styled in a way that works in the widget. 
+This all pretty much works already, although the dashboard widget is crude. 
 
 My wishlist:
 
-* some smarts in the tagging. For example, if I have a tag called #foo and all the notes tagged #foo are also tagged #todo, and those #todos are all complete, it could cross out the tag. 
+* some smarts in the tagging. For example, if I have a tag called #foo and all the notes tagged #foo are also tagged #todo, and those #todos are all complete, it could cross out the tag.
 * better UI layout
+* autosuggest in the dashboard widget
+* 
 * ability to delete notes
 * mobile UI
 
-It uses Camping, JQuery, and Dashcode (optional). If you don't have them yet, install the camping and markaby ruby gems and then run "camping mutter.rb" from the application's folder. 
+It uses Camping, JQuery, and Dashcode (optional). If you don't have them yet, install the camping and markaby ruby gems and then run "camping mutter.rb" from the application's folder. To use the dashboard widget, build it 
 
 It's my first Ruby/Camping project so feel free to offer feedback. For now, it uses ActiveRecord. 
 

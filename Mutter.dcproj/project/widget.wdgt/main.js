@@ -113,10 +113,17 @@ if (window.widget) {
 function saveNote(event)
 {
     var text = escape(content.value);
-    var req = new XMLHttpRequest();
     var url = serverUrl.value + '/add/';
-    req.open("POST",url,true);
-    req.send("content=" + text);
+    
+    $.ajax({
+        type:"post",
+        url: url,
+        data:"content=" + text,
+        success: function() {
+            $(content).val("");
+        },
+    });
+
 }
 
 
