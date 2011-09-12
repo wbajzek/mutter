@@ -114,7 +114,13 @@ function saveNote(event)
 {
     var text = escape(content.value);
     var req = new XMLHttpRequest();
-    var url = serverUrl.value + '/add/' + text;
+    var url = serverUrl.value + '/add/';
     req.open("POST",url,true);
-    req.send(text);
+    req.send("content=" + text);
+}
+
+
+function gotoNotes(event)
+{
+    widget.openURL(serverUrl.value);
 }

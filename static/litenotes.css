@@ -17,39 +17,46 @@ ul {
     text-indent:0;
     padding:0;
 }
-ul.notes li {
+ul.notes li, ul.search li {
     padding:10px;
     border-radius:20px;
     background-color:white;
     margin:3px;
 }
 ul.notes li span { color:#666; }
-ul.notes li textarea {
+ul.notes li.done p {text-decoration: line-through;}
+
+ul.notes li textarea,
+ul.search li input[type=text] {
     width:100%;
     min-height:52px;
     border:1px solid #eee;
     border-radius:5px;
 }
-ul.notes li input[type=submit] {
+
+ul.search li input[type=text] {
+    min-height:25px;
+}
+
+input[type=submit] {
     border:1px solid #eee;
     background-color:#ddd;
     float:right;
     border-radius:5px;
 }
-ul.notes li input[type=submit]:hover {
+input[type=submit]:hover {
     background-color:#eee;
 } 
-h2.tags {
+div.sidebar {
     margin:0;
     padding:0;
     position:fixed;
     top: 0;
-    left: 410px;    
+    left: 410px;        
+}
+h2.tags {
 }
 ul.tags {
-    position:fixed;
-    top: 32px;
-    left: 410px;
     border-radius:20px;
     background-color:white;
     min-height:83px;

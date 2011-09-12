@@ -2,51 +2,68 @@ Camping.goes :Litenotes
 
 module Litenotes::Models
   class Note < Base
+    has_one :todo
   end
   class Tag < Base
   end
-
-  class CreateNotes < V 1.0
+  class Todo < Base
+    belongs_to :note
+  end
+  class Create < V 1.0
     def self.up
       create_table Note.table_name do |t|
         t.string :content
         t.timestamps
       end
-    end
-    def self.down
-      drop_table Note.table_name
-    end
-  end
-
-  class CreateTags < V 1.1
-    def self.up
       create_table Tag.table_name do |t|
         t.string :name
       end
+      create_table Todo.table_name do |t|
+        t.column :done, :boolean
+        t.integer :note_id
+      end      
     end
     def self.down
+      drop_table Note.table_name
       drop_table Tag.table_name
+      drop_table Todo.table_name
     end
   end
 end
 
 module Litenotes::Controllers
-  class Index < R '/'
+  class Index
     def get
       @notes = Note.all.reverse
+      @tags = Tag.all
+      @todos = Todo.all
+      render :index
+    end
+  end
+  class Search
+    def get
+      @notes = Note.find(:all, :conditions => ['content LIKE ?','%' + @input.search + '%']).reverse      
       @tags = Tag.all
       render :index
     end
   end
-  class NoteX < R '/note/add'
+  class Add
     def post
       @note = Note.new;
       @note.content = @input.content
       @note.save
       @input.content.scan(/\#\w+/).each do |tag|
         Tag.new(:name=>tag).save unless Tag.find_by_name(tag)
+        Todo.new(:done=>false,:note_id=>@note.id).save if tag == "#todo"
       end
       redirect Index
+    end
+  end
+  class TodoNX
+    def post(id, done)
+      @todo = Todo.find_by_id(id)
+      @todo.done = done
+      @status = "200" if @todo.save
     end
   end
   class TagX
@@ -64,7 +81,7 @@ module Litenotes::Controllers
       @tags.each do |tag|
         tag_names.push '"' + tag.name + '"'
       end 
-      mab {  "[ " + tag_names.join(',') + "];" }
+      mab {  "[ " + tag_names.join(',') + "]" }
     end
   end
   class Static < R '/static/(.+)'
@@ -106,25 +123,38 @@ module Litenotes::Views
     h2 { "Notes" }
     ul.notes do
       li.newnote do
-        form :action => R(NoteX), :method => :post do
+        form :action => R(Add), :method => :post do
           textarea "", :id => :content, :name => :content
           label :for => :content
           input :type => :submit, :value => 'Save'
         end 
       end
+      @todos.to_json
       @notes.each do |note|
         li do
           span note.created_at
+          input :type => :checkbox, :value => note.todo.id, :checked => note.todo.done if note.todo
           p note.content
         end
       end
     end
-    h2.tags {"Tags"}
-    ul.tags do
-      li {a "None", :href => "/"}
-      @tags.each do |tag|
+    div.sidebar do
+      h2.tags {"Tags"}
+      ul.tags do
+        li {a "None", :href => R(Index)}
+        @tags.each do |tag|
+          li do
+            a tag.name, :href => R(TagX, tag.name)
+          end
+        end
+      end
+      h2.search {"Search"}
+      ul.search do
         li do
-          a tag.name, :href => R(TagX, tag.name)
+          form :action => R(Search), :method=>:get do
+            input :type => :text, :id => :search, :value => @input.search
+            input :type => :submit, :value => 'Search'
+          end
         end
       end
     end
@@ -132,7 +162,7 @@ module Litenotes::Views
 end
 
 def Litenotes.create 
-  Litenotes::Models.create_schema
+  Litenotes::Models.create_schema()
 end
 
 

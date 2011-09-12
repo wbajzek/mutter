@@ -91,9 +91,9 @@ body {
     right: auto;
     margin-top: 0px;
     width: 112px;
-    left: 143px;
-    top: 123px;
-    bottom: 24px;
+    top: 122px;
+    left: 265px;
+    bottom: 25px;
     height: auto;
 }
 
@@ -122,4 +122,20 @@ body {
     left: 166px;
     top: 26px;
     width: 207px;
+}
+
+#button {
+    font-family: HelveticaNeue-Bold;
+    font-size: 12px;
+    text-align: center;
+    cursor: default;
+    -khtml-user-select: none;
+    position: absolute;
+    right: auto;
+    margin-top: 0px;
+    left: 21px;
+    top: 122px;
+    width: 110px;
+    bottom: 24px;
+    height: auto;
 }
