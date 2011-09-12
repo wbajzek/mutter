@@ -1,16 +1,22 @@
 body {
     font-family:"Myriad pro";
     color:#333;
-    background-color:#eeeeee;
+    background-color:#eee;
 }
 
 body, ul, h1, h2, h3 {
     margin:0;
     padding:0;    
 }
-
+h2.notes{
+    top:0;
+    position:fixed;
+}
+ul.notes {
+    margin-top:30px;
+}
 ul.notes, ul.tags, h1, h2, h3 { width:400px;}
-h1, h2, h3 { text-align:center;}
+h1, h2, h3 { text-align:center; background-color:#eee;}
 ul {
     list-style:none;  
     width:400px;
@@ -26,6 +32,10 @@ ul.notes li, ul.search li {
 ul.notes li span { color:#666; }
 ul.notes li.done p {text-decoration: line-through;}
 
+.sidebar ul li { width:100%;}
+h2.search {
+    margin-top:20px;
+}
 ul.notes li textarea,
 ul.search li input[type=text] {
     width:100%;

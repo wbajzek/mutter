@@ -115,12 +115,12 @@ module Litenotes::Views
         script nil,:src=>"/static/jquery-ui-1.8.16.custom.min.js"
         script nil,:src=>"/static/litenotes.js"        
       end
-      body { self << yield }
+      body { div.wrapper {self << yield} }
     end
   end
   
   def index
-    h2 { "Notes" }
+    h2.notes { "Notes" }
     ul.notes do
       li.newnote do
         form :action => R(Add), :method => :post do
