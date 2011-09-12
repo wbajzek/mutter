@@ -20,6 +20,8 @@ My wishlist:
 * ability to delete notes
 * mobile UI
 
-It uses Camping, JQuery, and Dashcode (optional). It's my first Ruby/Camping project so feel free to offer feedback. For now, it uses ActiveRecord. 
+It uses Camping, JQuery, and Dashcode (optional). If you don't have them yet, install the camping and markaby ruby gems and then run "camping mutter.rb" from the application's folder. 
+
+It's my first Ruby/Camping project so feel free to offer feedback. For now, it uses ActiveRecord. 
 
 Sorry, but you're not limited to 140 characters.
