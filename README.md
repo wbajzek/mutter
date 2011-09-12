@@ -18,7 +18,6 @@ My wishlist:
 * some smarts in the tagging. For example, if I have a tag called #foo and all the notes tagged #foo are also tagged #todo, and those #todos are all complete, it could cross out the tag.
 * better UI layout
 * autosuggest in the dashboard widget
-* 
 * ability to delete notes
 * mobile UI
 
