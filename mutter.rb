@@ -56,7 +56,7 @@ module Mutter::Controllers
         Tag.new(:name=>tag).save unless Tag.find_by_name(tag)
         Todo.new(:done=>false,:note_id=>@note.id).save if tag == "#todo"
       end
-      redirect Index
+      mab{ send(:one_note,@note) }
     end
   end
   class DeleteN
@@ -91,7 +91,7 @@ module Mutter::Controllers
   class TagsList
     def get
       @tags = Tag.all
-      mab{ send(:tagslist) }
+      mab{ send(:tags_list) }
     end
   end
   class Tags
@@ -159,7 +159,7 @@ module Mutter::Views
               a.done_filter "done", :href => "javascript:return"
               a.no_filter "all", :href => "javascript:return"
             end
-            form :action => R(Add), :method => :post do
+            form.newnote :action => R(Add), :method => :post do
               textarea "", :id => :content, :name => :content
               label :for => :content
               input :type => :submit, :value => 'Save'
@@ -167,18 +167,13 @@ module Mutter::Views
           end
           @todos.to_json
           @notes.each do |note|
-            li.note do 
-              span note.created_at
-              a.delete "X", :href => R(DeleteN, note.id)
-              input.todo :type => :checkbox, :value => note.todo.id, :checked => note.todo.done if note.todo
-              p { note.content.gsub(/\#\w+/) { |tag| a tag, :href => R(TagX, tag) } }
-            end
+            one_note(note)
           end
         end
       end
       div.sidebar do
         h2.tags { "Tags" }
-        ul.tags { tagslist }
+        ul.tags { tags_list }
         h2.search {"Search"}
         ul.search do
           li do
@@ -191,7 +186,15 @@ module Mutter::Views
       end
     end
   end
-  def tagslist
+  def one_note(note)
+    li.note do 
+      span note.created_at
+      a.delete "X", :href => R(DeleteN, note.id)
+      input.todo :type => :checkbox, :value => note.todo.id, :checked => note.todo.done if note.todo
+      p { note.content.gsub(/\#\w+/) { |tag| a tag, :href => R(TagX, tag) } }
+    end
+  end
+  def tags_list
     li {a "None", :href => R(Index)}
     @tags.each do |tag|
       li do

@@ -42,17 +42,23 @@ $(function() {
             },
         });
     })
+
+    $('form.newnote').submit(function(event) {
+        event.preventDefault();
+        var $form = $(this),
+            note = $form.find( 'textarea' ).val(),
+            url = $form.attr( 'action' );
+        $.post(url, { 'content':note },
+            function(data) {                 
+                $('li.newnote').after(data); 
+                $('li.newnote').next().find('a.delete').bind('click',deleteHandler);
+                $('li.newnote textarea').val("");
+                refreshTags();
+            }
+        );        
+    });
     
-    
-    // filtering
-    $('ul.notes input.todo').closest('li').addClass('todo');
-    $('a.todo_filter').click(function() {
-        $('ul.notes > :not(".todo,.newnote")').hide();
-        $('ul.notes > .todo, ul.notes > .newnote').show();
-    })
-    $('a.done_filter').click(function() { $('ul.notes > :not(".done,.newnote")').hide(); })
-    $('a.no_filter').click(function() {  $('ul.notes li').show();  })
-    $('a.delete').click(function(event) {
+    deleteHandler = function(event) {
         event.preventDefault();
         if (confirm("Delete this note?")) {
             var note = $(this).closest("li");
@@ -62,9 +68,19 @@ $(function() {
                 success: function() { note.fadeOut(); refreshTags(); },
             });
         }
-    });
+    };
     
-    function refreshTags() {
-        $('ul.tags').load("/tags/list");
-    }
+    $('a.delete').bind('click',deleteHandler);
+    
+    function refreshTags() { $('ul.tags').load("/tags/list"); }
+    
+    // filtering
+    $('ul.notes input.todo').closest('li').addClass('todo');
+    $('a.todo_filter').click(function() {
+        $('ul.notes > :not(".todo,.newnote")').hide();
+        $('ul.notes > .todo, ul.notes > .newnote').show();
+    })
+    $('a.done_filter').click(function() { $('ul.notes > :not(".done,.newnote")').hide(); })
+    $('a.no_filter').click(function() {  $('ul.notes li').show();  })
+    
 })
