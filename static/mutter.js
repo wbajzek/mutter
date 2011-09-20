@@ -59,8 +59,12 @@ $(function() {
             $.ajax({
                 type:"post",
                 url: $(this).attr("href"),
-                success: function() { note.fadeOut(); },
+                success: function() { note.fadeOut(); refreshTags(); },
             });
         }
     });
+    
+    function refreshTags() {
+        $('ul.tags').load("/tags/list");
+    }
 })

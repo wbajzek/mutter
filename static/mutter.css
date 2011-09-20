@@ -70,6 +70,7 @@ input[type=submit], span.filter a, a.delete {
     font: 11px "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
     padding:2px 6px 2px 6px;
     text-align: center;
+    text-decoration:none;
 }
 input[type=submit]:hover, span.filter a:hover {
     background-color:#ddd;

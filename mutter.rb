@@ -88,6 +88,12 @@ module Mutter::Controllers
       render :index
     end
   end
+  class TagsList
+    def get
+      @tags = Tag.all
+      mab{ send(:tagslist) }
+    end
+  end
   class Tags
     def get
       @headers['Content-Type'] = "application/json"
@@ -171,16 +177,8 @@ module Mutter::Views
         end
       end
       div.sidebar do
-        h2.tags {"Tags"}
-        ul.tags do
-          li {a "None", :href => R(Index)}
-          @tags.each do |tag|
-            li do
-              text " "
-              a tag.name, :href => R(TagX, tag.name)
-            end
-          end
-        end
+        h2.tags { "Tags" }
+        ul.tags { tagslist }
         h2.search {"Search"}
         ul.search do
           li do
@@ -190,6 +188,15 @@ module Mutter::Views
             end
           end
         end
+      end
+    end
+  end
+  def tagslist
+    li {a "None", :href => R(Index)}
+    @tags.each do |tag|
+      li do
+        text " "
+        a tag.name, :href => R(TagX, tag.name)
       end
     end
   end
