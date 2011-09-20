@@ -5,7 +5,7 @@ $(function() {
         source: function(request, response) {
             var baseUrl = "";
             if (serverUrl)
-                baseUrl = serverUrl.value;
+                baseUrl = serverUrl;
                 
             var parsed = request.term.split("#");
             if (parsed.length > 1 && parsed[parsed.length - 1].length > 0) {

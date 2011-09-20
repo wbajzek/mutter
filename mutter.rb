@@ -111,7 +111,9 @@ module Mutter::Views
     html do
       head do
         title { "Mutter" }
-        link :href=>"/static/Mutter.css", :type=>"text/css", :rel=>"stylesheet"
+        link :href=>"/static/mutter.css", :type=>"text/css", :rel=>"stylesheet"
+        link :href=>"/static/jquery.ui.autocomplete.css", :type=>"text/css", :rel=>"stylesheet"
+        script "var serverUrl = '';"
         script nil,:src=>"/static/jquery-1.6.3.min.js"
         script nil,:src=>"/static/jquery-ui-1.8.16.custom.min.js"
         script nil,:src=>"/static/mutter.js"        
