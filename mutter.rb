@@ -42,9 +42,19 @@ module Mutter::Controllers
   end
   class Search
     def get
-      @notes = Note.find(:all, :conditions => ['content LIKE ?','%' + @input.search + '%']).reverse      
+      @notes = Note.find(:all, :conditions => ['content LIKE ?','%' + @input.search + '%']).reverse  
       @tags = Tag.all
       render :index
+    end
+  end
+  class SearchAjaxX
+    def get(term)
+      if (term.length < 3) then
+        @notes = Note.all.reverse
+      else
+        @notes = Note.find(:all, :conditions => ['content LIKE ?','%' + term + '%']).reverse  
+      end    
+      mab{ send(:list_notes) }
     end
   end
   class Add
@@ -166,9 +176,7 @@ module Mutter::Views
             end 
           end
           @todos.to_json
-          @notes.each do |note|
-            one_note(note)
-          end
+          list_notes
         end
       end
       div.sidebar do
@@ -192,6 +200,15 @@ module Mutter::Views
       a.delete "X", :href => R(DeleteN, note.id)
       input.todo :type => :checkbox, :value => note.todo.id, :checked => note.todo.done if note.todo
       p { note.content.gsub(/\#\w+/) { |tag| a tag, :href => R(TagX, tag) } }
+    end
+  end
+  def list_notes
+    if @notes.count == 0 then
+      li.nonotes { p "No notes were found. "}
+    else
+      @notes.each do |note|
+        one_note(note)
+      end
     end
   end
   def tag_list

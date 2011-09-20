@@ -83,4 +83,22 @@ $(function() {
     $('a.done_filter').click(function() { $('ul.notes > :not(".done,.newnote")').hide(); })
     $('a.no_filter').click(function() {  $('ul.notes li').show();  })
     
+    // searching
+    $('input#search').autocomplete({
+        source: function(request, response) {
+            var baseUrl = "";
+            if (serverUrl)
+                baseUrl = serverUrl;
+
+        
+            $.ajax({
+                url: baseUrl + "/search/ajax/" + request.term,
+                complete: function(data) {  
+                    $('ul.notes li').not('.newnote').remove();
+                    $('ul.notes').append(data.responseText);
+                },
+            });
+        },
+    })
+    
 })

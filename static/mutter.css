@@ -39,6 +39,7 @@ ul.notes li, ul.search li {
 ul.notes li span { color:#666; }
 ul.notes li.done p {text-decoration: line-through;}
 
+li.nonotes { text-align:center; }
 .sidebar > ul { margin-bottom:20px;}
 .sidebar ul li { width:100%;}
 
