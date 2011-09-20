@@ -61,14 +61,18 @@ span.filter a {
     margin-left:.5em;
 }
 
-input[type=submit] {
-    border:1px solid #eee;
-    background-color:#ddd;
+input[type=submit], span.filter a {
+    border:1px solid #ddd;
+    background-color:#ccc;
     float:right;
     border-radius:5px;
+    color:buttontext;
+    font: 11px "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
+    padding:2px 6px 2px 6px;
+    text-align: center;
 }
-input[type=submit]:hover {
-    background-color:#eee;
+input[type=submit]:hover, span.filter a:hover {
+    background-color:#ddd;
 } 
 
 div.sidebar {
