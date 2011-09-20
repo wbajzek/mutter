@@ -10,7 +10,7 @@ $(function() {
             var parsed = request.term.split("#");
             if (parsed.length > 1 && parsed[parsed.length - 1].length > 0) {
                 $.ajax({
-                    url: baseUrl + "/tags?term=%23" + parsed[parsed.length - 1],
+                    url: baseUrl + "/tag/suggest?term=%23" + parsed[parsed.length - 1],
                     complete: function(data) { response(eval(data.responseText));},
                 });
             }
@@ -72,7 +72,7 @@ $(function() {
     
     $('a.delete').bind('click',deleteHandler);
     
-    function refreshTags() { $('ul.tags').load("/tags/list"); }
+    function refreshTags() { $('ul.tags').load("/tag/list"); }
     
     // filtering
     $('ul.notes input.todo').closest('li').addClass('todo');

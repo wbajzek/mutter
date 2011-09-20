@@ -88,13 +88,13 @@ module Mutter::Controllers
       render :index
     end
   end
-  class TagsList
+  class TagList
     def get
       @tags = Tag.all
-      mab{ send(:tags_list) }
+      mab{ send(:tag_list) }
     end
   end
-  class Tags
+  class TagSuggest
     def get
       @headers['Content-Type'] = "application/json"
       @tags = Tag.find(:all, :conditions => ['name LIKE ?', @input.term + '%'])
@@ -172,8 +172,6 @@ module Mutter::Views
         end
       end
       div.sidebar do
-        h2.tags { "Tags" }
-        ul.tags { tags_list }
         h2.search {"Search"}
         ul.search do
           li do
@@ -183,6 +181,8 @@ module Mutter::Views
             end
           end
         end
+        h2.tags { "Tags" }
+        ul.tags { tag_list }
       end
     end
   end
@@ -194,7 +194,7 @@ module Mutter::Views
       p { note.content.gsub(/\#\w+/) { |tag| a tag, :href => R(TagX, tag) } }
     end
   end
-  def tags_list
+  def tag_list
     li {a "None", :href => R(Index)}
     @tags.each do |tag|
       li do

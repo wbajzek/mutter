@@ -14,13 +14,15 @@ a:link, a:visited {
     text-decoration:underline;    
 }
 
-ul.notes, ul.tags, h1, h2, h3 { width:400px;}
+h1 {margin-top:50px; width:100%; }
+h1, h2, h3 { text-align:center; background-color:#eee;}
+
+ul.notes, ul.tags, h2, h3 { width:400px;}
 div.wrapper {width:850px; margin:20px auto 20px auto;}
 div.main {float:left;}
 div.sidebar { float:right;}
 
-h1, h2, h3 { text-align:center; background-color:#eee;}
-h1 { margin-top:50px; width:100%; }
+
 ul {
     list-style:none;  
     width:400px;
@@ -37,10 +39,9 @@ ul.notes li, ul.search li {
 ul.notes li span { color:#666; }
 ul.notes li.done p {text-decoration: line-through;}
 
+.sidebar > ul { margin-bottom:20px;}
 .sidebar ul li { width:100%;}
-h2.search {
-    margin-top:20px;
-}
+
 ul.notes li textarea,
 ul.search li input[type=text] {
     width:100%;
@@ -49,17 +50,13 @@ ul.search li input[type=text] {
     border-radius:5px;
 }
 
-ul.search li input[type=text] {
-    min-height:25px;
-}
+ul.search li input[type=text] { min-height:25px; }
 
 span.filter {
     float:right;
     margin-top:-37px;
 }
-span.filter a {
-    margin-left:.5em;
-}
+span.filter a { margin-left:.5em; }
 
 input[type=submit], span.filter a, a.delete {
     border:1px solid #ddd;
@@ -72,28 +69,18 @@ input[type=submit], span.filter a, a.delete {
     text-align: center;
     text-decoration:none;
 }
-input[type=submit]:hover, span.filter a:hover {
-    background-color:#ddd;
-} 
-
-div.sidebar {
-    margin:0;
-    padding:0;
-}
+input[type=submit]:hover, span.filter a:hover { background-color:#ddd; } 
 
 ul.tags {
     width:400px;
     margin-top:5px;
     border-radius:20px;
     background-color:white;
-    min-height:83px;
     padding:10px;
     text-align:justify;
 }
 
-ul.tags li  {
-    display:inline;
-}
+ul.tags li  {  display:inline; }
 
 /* Auto-complete styles*/
 ul.ui-autocomplete {
