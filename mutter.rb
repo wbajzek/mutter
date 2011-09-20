@@ -148,7 +148,7 @@ module Mutter::Views
             li.note do 
               span note.created_at
               input.todo :type => :checkbox, :value => note.todo.id, :checked => note.todo.done if note.todo
-              p note.content
+              p { note.content.gsub(/\#\w+/) { |tag| a tag, :href => R(TagX, tag) } }
             end
           end
         end

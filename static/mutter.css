@@ -9,6 +9,12 @@ body, ul, h1, h2, h3 {
     padding:0;    
 }
 
+a:link, a:visited {
+    color:#554;
+    text-decoration:none;
+    border-bottom:1px solid #ddd;
+}
+
 ul.notes, ul.tags, h1, h2, h3 { width:400px;}
 div.wrapper {width:850px; margin:20px auto 20px auto;}
 div.main {float:left;}
