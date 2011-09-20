@@ -11,8 +11,7 @@ body, ul, h1, h2, h3 {
 
 a:link, a:visited {
     color:#554;
-    text-decoration:none;
-    border-bottom:1px solid #ddd;
+    text-decoration:underline;    
 }
 
 ul.notes, ul.tags, h1, h2, h3 { width:400px;}
@@ -62,7 +61,7 @@ span.filter a {
     margin-left:.5em;
 }
 
-input[type=submit], span.filter a {
+input[type=submit], span.filter a, a.delete {
     border:1px solid #ddd;
     background-color:#ccc;
     float:right;
@@ -82,16 +81,17 @@ div.sidebar {
 }
 
 ul.tags {
+    width:400px;
     margin-top:5px;
     border-radius:20px;
     background-color:white;
     min-height:83px;
     padding:10px;
+    text-align:justify;
 }
-ul.tags li {
+
+ul.tags li  {
     display:inline;
-    border:none;
-    margin-right: 1em;
 }
 
 /* Auto-complete styles*/

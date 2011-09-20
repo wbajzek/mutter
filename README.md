@@ -17,7 +17,7 @@ My wishlist:
 * some smarts in the tagging. For example, if I have a tag called #foo and all the notes tagged #foo are also tagged #todo, and those #todos are all complete, it could cross out the tag.
 * sorting options
 * autosuggest in the dashboard widget
-* ability to delete and edit notes
+* ability to edit notes
 * mobile UI
 
 It uses Camping, JQuery, and Dashcode (optional). If you don't have them yet, install the camping and markaby ruby gems and then run "camping mutter.rb" from the application's folder. To use the dashboard widget, build it from within Dashcode then run File > Deploy and click "Deploy to Dashboard." Note that I am still running Snow Leopard for now and haven't tested the dashboard widget with a later OS or DashCode yet. It's simple enough that I don't see any reason why it wouldn't work, though.

@@ -50,11 +50,17 @@ $(function() {
         $('ul.notes > :not(".todo,.newnote")').hide();
         $('ul.notes > .todo, ul.notes > .newnote').show();
     })
-    $('a.done_filter').click(function() {
-        $('ul.notes > :not(".done,.newnote")').hide();
-    })
-    $('a.no_filter').click(function() {
-        $('ul.notes li').show();
-    })
-    
+    $('a.done_filter').click(function() { $('ul.notes > :not(".done,.newnote")').hide(); })
+    $('a.no_filter').click(function() {  $('ul.notes li').show();  })
+    $('a.delete').click(function(event) {
+        event.preventDefault();
+        if (confirm("Delete this note?")) {
+            var note = $(this).closest("li");
+            $.ajax({
+                type:"post",
+                url: $(this).attr("href"),
+                success: function() { note.fadeOut(); },
+            });
+        }
+    });
 })

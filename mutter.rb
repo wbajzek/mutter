@@ -59,6 +59,20 @@ module Mutter::Controllers
       redirect Index
     end
   end
+  class DeleteN
+    def post(id)
+      @note = Note.find_by_id(id)
+      @note.content.scan(/\#\w+/).each do |tag|
+        @notes = Note.find(:all, :conditions => ['content LIKE ?','%' + tag + '%'])
+        if @notes.count == 1 then  
+          tag = Tag.find_by_name(tag)
+          tag.delete if tag
+        end 
+      end
+      @note.delete
+      @status = "200"
+    end
+  end
   class TodoNX
     def post(id, done)
       @todo = Todo.find_by_id(id)
@@ -149,6 +163,7 @@ module Mutter::Views
           @notes.each do |note|
             li.note do 
               span note.created_at
+              a.delete "X", :href => R(DeleteN, note.id)
               input.todo :type => :checkbox, :value => note.todo.id, :checked => note.todo.done if note.todo
               p { note.content.gsub(/\#\w+/) { |tag| a tag, :href => R(TagX, tag) } }
             end
@@ -161,6 +176,7 @@ module Mutter::Views
           li {a "None", :href => R(Index)}
           @tags.each do |tag|
             li do
+              text " "
               a tag.name, :href => R(TagX, tag.name)
             end
           end
