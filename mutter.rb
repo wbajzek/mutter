@@ -32,31 +32,7 @@ module Mutter::Models
 end
 
 module Mutter::Controllers
-  class Index
-    def get
-      @notes = Note.all.reverse
-      @tags = Tag.all
-      @todos = Todo.all
-      render :index
-    end
-  end
-  class Search
-    def get
-      @notes = Note.find(:all, :conditions => ['content LIKE ?','%' + @input.search + '%']).reverse  
-      @tags = Tag.all
-      render :index
-    end
-  end
-  class SearchAjaxX
-    def get(term)
-      if (term.length < 3) then
-        @notes = Note.all.reverse
-      else
-        @notes = Note.find(:all, :conditions => ['content LIKE ?','%' + term + '%']).reverse  
-      end    
-      mab{ send(:list_notes) }
-    end
-  end
+  # Crud methods
   class Add
     def post
       @note = Note.new;
@@ -83,6 +59,32 @@ module Mutter::Controllers
       @status = "200"
     end
   end
+  # Various ways of retrieval 
+  class Index
+    def get
+      @notes = Note.all.reverse
+      @tags = Tag.find(:all,:order=>:name)
+      @todos = Todo.all
+      render :index
+    end
+  end
+  class Search # called when you click the "search" button
+    def get
+      @notes = Note.find(:all, :conditions => ['content LIKE ?','%' + @input.search + '%']).reverse  
+      @tags = Tag.find(:all,:order=>:name)
+      render :index
+    end
+  end
+  class SearchAjaxX # "live" search from the search textbox
+    def get(term)
+      if (term.length < 3) then
+        @notes = Note.all.reverse
+      else
+        @notes = Note.find(:all, :conditions => ['content LIKE ?','%' + term + '%']).reverse  
+      end    
+      mab{ send(:list_notes) }
+    end
+  end
   class TodoNX
     def post(id, done)
       @todo = Todo.find_by_id(id)
@@ -94,20 +96,20 @@ module Mutter::Controllers
     def get(tag)
       @notes = Note.find(:all, :conditions => ['content LIKE ?','%' + tag + '%']).reverse      
       @this_tag = tag
-      @tags = Tag.all
+      @tags = Tag.find(:all,:order=>:name)
       render :index
     end
   end
   class TagList
     def get
-      @tags = Tag.all
+      @tags = Tag.find(:all,:order=>:name)
       mab{ send(:tag_list) }
     end
   end
   class TagSuggest
     def get
       @headers['Content-Type'] = "application/json"
-      @tags = Tag.find(:all, :conditions => ['name LIKE ?', @input.term + '%'])
+      @tags = Tag.find(:all, :conditions => ['name LIKE ?', @input.term + '%'], :order => :name)
       tag_names = []
       @tags.each do |tag|
         tag_names.push '"' + tag.name + '"'
@@ -149,7 +151,6 @@ module Mutter::Views
         script nil,:src=>"/static/mutter.js"        
       end
       body do
-        h1 "Mutter" 
         div.wrapper {self << yield}
       end
     end

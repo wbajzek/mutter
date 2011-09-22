@@ -1,5 +1,8 @@
 $(function() {
-
+    
+    // refresh the tags list (when adding, deleting, etc)
+    function refreshTags() { $('ul.tags').load("/tag/list"); }
+    
     // Autocomplete
     $('textarea').autocomplete({
         source: function(request, response) {
@@ -29,7 +32,7 @@ $(function() {
        if ($(this).attr("checked")=="checked")
         $(this).closest("li").addClass("done");
     });
-    $('ul.notes li input[type="checkbox"]').click(function() {
+    $('ul.notes li input[type="checkbox"]').live('click',function() {
         var checked = $(this).attr("checked")=="checked"?true:false;
         var ajaxUrl = "/todo/" + $(this).val() + "/" + checked;
         var checkbox = $(this);
@@ -72,7 +75,6 @@ $(function() {
     
     $('a.delete').bind('click',deleteHandler);
     
-    function refreshTags() { $('ul.tags').load("/tag/list"); }
     
     // filtering
     $('ul.notes input.todo').closest('li').addClass('todo');

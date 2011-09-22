@@ -17,7 +17,8 @@ a:link, a:visited {
 h1 {margin-top:50px; width:100%; }
 h1, h2, h3 { text-align:center; background-color:#eee;}
 
-ul.notes, ul.tags, h2, h3 { width:400px;}
+ul.search, ul.tags, .sidebar h2, .sidebar h3 { width:300px;}
+ul.notes{ width:500px;}
 div.wrapper {width:850px; margin:20px auto 20px auto;}
 div.main {float:left;}
 div.sidebar { float:right;}
@@ -25,11 +26,10 @@ div.sidebar { float:right;}
 
 ul {
     list-style:none;  
-    width:400px;
     text-indent:0;
     padding:0;
 }
-ul.notes li, ul.search li {
+ul.notes li, ul.search li, ul.tags {
     padding:10px;
     border-radius:20px;
     background-color:white;
@@ -73,7 +73,7 @@ input[type=submit], span.filter a, a.delete {
 input[type=submit]:hover, span.filter a:hover { background-color:#ddd; } 
 
 ul.tags {
-    width:400px;
+    width:300px;
     margin-top:5px;
     border-radius:20px;
     background-color:white;
