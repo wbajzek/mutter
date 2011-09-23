@@ -106,7 +106,7 @@ module Mutter::Controllers
       mab{ send(:tag_list) }
     end
   end
-  class TagSuggest
+  class Suggest
     def get
       @headers['Content-Type'] = "application/json"
       @tags = Tag.find(:all, :conditions => ['name LIKE ?', @input.term + '%'], :order => :name)

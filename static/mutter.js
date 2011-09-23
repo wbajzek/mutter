@@ -13,7 +13,7 @@ $(function() {
             var parsed = request.term.split("#");
             if (parsed.length > 1 && parsed[parsed.length - 1].length > 0) {
                 $.ajax({
-                    url: baseUrl + "/tag/suggest?term=%23" + parsed[parsed.length - 1],
+                    url: baseUrl + "/suggest?term=%23" + parsed[parsed.length - 1],
                     complete: function(data) { response(eval(data.responseText));},
                 });
             }
