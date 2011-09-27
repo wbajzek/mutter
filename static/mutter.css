@@ -1,3 +1,4 @@
+
 body {
     font-family:"Myriad pro";
     color:#333;
@@ -98,4 +99,17 @@ ul.ui-autocomplete li {
 }
 ul.ui-autocomplete li:hover {
     background-color:#eee;
+}
+
+
+@media screen and (max-width: 860px) {
+    div.sidebar, div.main {
+        float:none;
+    }
+    div.sidebar, div.wrapper, div.main, 
+    ul.notes, ul.search, ul.tags,
+    ul.search li,
+    .sidebar h2, .sidebar h3 {
+        width:100%;
+    }
 }
