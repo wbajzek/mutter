@@ -1,7 +1,7 @@
 $(function() {
     
     // refresh the tags list (when adding, deleting, etc)
-    function refreshTags() { $('ul.tags').load("/tag/list"); }
+    function refreshTags() { $('ul.tags').load("/tags"); }
     
     // Autocomplete
     $('textarea').autocomplete({

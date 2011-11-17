@@ -100,7 +100,7 @@ module Mutter::Controllers
       render :index
     end
   end
-  class TagList
+  class Tags
     def get
       @tags = Tag.find(:all,:order=>:name)
       mab{ send(:tag_list) }
